@@ -4,7 +4,6 @@ from datetime import datetime
 
 import numpy as np
 import xarray as xr
-from numpy import ma
 import pyproj
 
 import argparse
