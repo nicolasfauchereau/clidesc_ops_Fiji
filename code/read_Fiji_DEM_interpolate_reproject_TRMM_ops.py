@@ -1,6 +1,6 @@
 import os
 import pathlib
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import numpy as np
 import xarray as xr
@@ -129,3 +129,17 @@ NODATA_value = -9999."""
 np.savetxt(opath / 'trmm_{:%Y%m%d}_interp_NN_Fiji_DEM_fmt.txt'.format(date), trmm_interp_nn_data, header=header, comments='', fmt='%8.4f')
 
 np.savetxt(opath / 'trmm_{:%Y%m%d}_interp_Linear_Fiji_DEM_fmt.txt'.format(date), trmm_interp_lin_data, header=header, comments='', fmt='%8.4f')
+
+# cleanup 
+
+now = datetime.now()
+
+lfiles_txt = list(opath.glob("*.txt"))
+
+for f in lfiles_txt: 
+    modtime = os.path.getmtime(f)
+    modtime = datetime.fromtimestamp(modtime) 
+    if (modtime < (now - timedelta(days=10))): 
+        os.remove(f) 
+    else:
+        pass
