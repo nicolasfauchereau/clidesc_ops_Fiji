@@ -20,8 +20,8 @@ help='the path to the TRMM folder, default is /Users/nicolasf/data/TRMM/daily')
 parser.add_argument('-o','--opath', dest='opath', type=str, default='/Users/nicolasf/operational/clidesc_ops_Fiji/outputs', \
 help='the path where to save txt files containing the interpolated TRMM data (on Fiji DEM)')
 
-parser.add_argument('-n','--ncpath', dest='nc_path', type=str, default='/Users/nicolasf/operational/clidesc_ops_Fiji/outputs', \
-help='the path where to save the netcdf files containing interpolated values')
+#parser.add_argument('-n','--ncpath', dest='nc_path', type=str, default='/Users/nicolasf/operational/clidesc_ops_Fiji/outputs', \
+#help='the path where to save the netcdf files containing interpolated values')
 
 vargs = vars(parser.parse_args())
 
@@ -29,8 +29,7 @@ vargs = vars(parser.parse_args())
 
 dpath = pathlib.Path(vargs['dpath'])
 opath = pathlib.Path(vargs['opath'])
-nc_path = pathlib.Path(vargs['nc_path'])
-
+#nc_path = pathlib.Path(vargs['nc_path'])
 
 # define the coordinates for the Fiji DEM
 x  = np.arange(1797500, 1797500 + 1056 * 500, 500)
@@ -102,9 +101,9 @@ trmm_interp_lin = trmm.interp(lon=lons_arr, lat=lats_arr, method='linear')
 
 # saves to netcdf
 
-trmm_interp_nn.to_netcdf(nc_path / 'trmm_{:%Y%m%d}_interp_NN_Fiji_DEM.nc'.format(date))
+#trmm_interp_nn.to_netcdf(nc_path / 'trmm_{:%Y%m%d}_interp_NN_Fiji_DEM.nc'.format(date))
 
-trmm_interp_lin.to_netcdf(nc_path / 'trmm_{:%Y%m%d}_interp_Linear_Fiji_DEM.nc'.format(date))
+#trmm_interp_lin.to_netcdf(nc_path / 'trmm_{:%Y%m%d}_interp_Linear_Fiji_DEM.nc'.format(date))
 
 trmm_interp_nn_data = trmm_interp_nn['trmm'].data
 
@@ -121,9 +120,9 @@ yllcorner = 3551420
 cellsize = 500
 NODATA_value = -9999."""
 
-np.savetxt(opath / 'trmm_{:%Y%m%d}_interp_NN_Fiji_DEM.txt'.format(date), trmm_interp_nn_data, header=header, comments='')
+#np.savetxt(opath / 'trmm_{:%Y%m%d}_interp_NN_Fiji_DEM.txt'.format(date), trmm_interp_nn_data, header=header, comments='')
 
-np.savetxt(opath / 'trmm_{:%Y%m%d}_interp_Linear_Fiji_DEM.txt'.format(date), trmm_interp_lin_data, header=header, comments='')
+#np.savetxt(opath / 'trmm_{:%Y%m%d}_interp_Linear_Fiji_DEM.txt'.format(date), trmm_interp_lin_data, header=header, comments='')
 
 # ### saves in non-scientific format
 
